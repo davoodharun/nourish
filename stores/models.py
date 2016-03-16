@@ -9,9 +9,9 @@ STYLE_CHOICES = sorted((item, item) for item in get_all_styles())
 
 #Store Model
 ## Store model will contain many Items
-class Stores(models.Model):
+class Store(models.Model):
     name = models.CharField(max_length=100, default='')
-    desription = models.CharField(max_length=1000, default='')
+    description = models.CharField(max_length=1000, default='')
 
     class Meta:
         ordering = ('name',)
@@ -21,6 +21,10 @@ class Item(models.Model):
     comments = models.CharField(max_length=100, default='')
     expired = models.BooleanField(default=False)
     expiration = models.DateTimeField(default='')
+    store = models.ForeignKey(Store, related_name='items', default=0)  
 
     class Meta:
         ordering = ('expiration',)
+
+    def __unicode__(self):
+        return '%d: %s' % (self.expiration, self.name)
