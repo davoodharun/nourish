@@ -26,7 +26,7 @@ class Item(models.Model):
     comments = models.CharField(max_length=100, default='')
     expired = models.BooleanField(default=False)
     expiration = models.DateTimeField(default='')
-    store = models.ForeignKey(Store, related_name='items', default=0) 
+    store = models.ForeignKey(Store, related_name='items', default='') 
 
     class Meta:
         ordering = ('expiration',)

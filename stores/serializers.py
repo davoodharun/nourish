@@ -2,7 +2,7 @@ from rest_framework import serializers
 from models import Store, Item
 from django.contrib.auth.models import User
 
-class StoreSerializer(serializers.ModelSerializer):
+class StoreSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
@@ -28,10 +28,10 @@ class StoreSerializer(serializers.ModelSerializer):
     #     instance.save()
     #     return instance
 
-class ItemSerializer(serializers.Serializer):
+class ItemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Item
-        fields = ('id', 'name', 'description', 'expired', 'expiration', 'store')
+        fields = ('id', 'name', 'comments', 'expired', 'expiration', 'store')
 
     # pk = serializers.IntegerField(read_only=True)
     # name = serializers.CharField(required=True, allow_blank=False, max_length=100)
@@ -59,7 +59,7 @@ class ItemSerializer(serializers.Serializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    stores = serializers.PrimaryKeyRelatedField(many=True, queryset=Store.objects.all())
+    stores = serializers.HyperlinkedRelatedField(many=True, view_name='store-detail', read_only=True)
 
     class Meta:
         model = User
