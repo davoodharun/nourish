@@ -4,10 +4,11 @@ from django.contrib.auth.models import User
 
 class StoreSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
+    items = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Store
-        fields = ('id', 'name', 'description', 'owner')
+        fields = ('id', 'name', 'description', 'owner', 'items')
     # pk = serializers.IntegerField(read_only=True)
     # name = serializers.CharField(required=True, allow_blank=False, max_length=100)
     # description = serializers.CharField(required=False, allow_blank=True, max_length=1000)
@@ -29,9 +30,11 @@ class StoreSerializer(serializers.HyperlinkedModelSerializer):
     #     return instance
 
 class ItemSerializer(serializers.HyperlinkedModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+    
     class Meta:
         model = Item
-        fields = ('id', 'name', 'comments', 'expired', 'expiration', 'store')
+        fields = ('id', 'name', 'comments', 'expired', 'expiration', 'store', 'owner')
 
     # pk = serializers.IntegerField(read_only=True)
     # name = serializers.CharField(required=True, allow_blank=False, max_length=100)

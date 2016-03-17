@@ -20,16 +20,19 @@ class Store(models.Model):
     class Meta:
         ordering = ('name',)
 
-
+    def __unicode__(self):
+       return '%s' % (self.name)
+               
 class Item(models.Model):
     name = models.CharField(max_length=100, default='')
     comments = models.CharField(max_length=100, default='')
     expired = models.BooleanField(default=False)
-    expiration = models.DateTimeField(default='')
-    store = models.ForeignKey(Store, related_name='items', default='') 
+    expiration = models.DateField(default='')
+    store = models.ForeignKey(Store, related_name='items', default='')
+    owner = models.ForeignKey('auth.User', related_name='item') 
 
     class Meta:
         ordering = ('expiration',)
 
     def __unicode__(self):
-        return '%d: %s' % (self.expiration, self.name)
+       return '%s: %s' % (self.name, self.expiration)
