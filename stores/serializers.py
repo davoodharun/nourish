@@ -1,10 +1,13 @@
 from rest_framework import serializers
 from models import Store, Item
+from django.contrib.auth.models import User
 
 class StoreSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+
     class Meta:
         model = Store
-        fields = ('id', 'name', 'description')
+        fields = ('id', 'name', 'description', 'owner')
     # pk = serializers.IntegerField(read_only=True)
     # name = serializers.CharField(required=True, allow_blank=False, max_length=100)
     # description = serializers.CharField(required=False, allow_blank=True, max_length=1000)
@@ -53,3 +56,11 @@ class ItemSerializer(serializers.Serializer):
     #     instance.expiration = validated_data.get('expiration', instance.expiration)
     #     instance.save()
     #     return instance
+
+
+class UserSerializer(serializers.ModelSerializer):
+    stores = serializers.PrimaryKeyRelatedField(many=True, queryset=Store.objects.all())
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'stores')
