@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class StoreSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
-    items = serializers.StringRelatedField(many=True)
+    items = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='item-detail' )
 
     class Meta:
         model = Store
@@ -31,7 +31,8 @@ class StoreSerializer(serializers.HyperlinkedModelSerializer):
 
 class ItemSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
-    
+    store = serializers.HyperlinkedRelatedField(many=False, read_only=True, view_name='store-detail' )
+
     class Meta:
         model = Item
         fields = ('id', 'name', 'comments', 'expired', 'expiration', 'store', 'owner')
