@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'stores.apps.StoresConfig',
+    'stores',
     'rest_framework',
 ]
 
@@ -56,7 +56,7 @@ MIDDLEWARE_CLASSES = [
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATE_DIRS = (
-    PROJECT_DIR.child("djangular").child('templates'),
+    PROJECT_DIR.child("nourish").child('templates'),
 )
 
 WSGI_APPLICATION = 'config.wsgi.application'

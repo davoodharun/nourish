@@ -17,7 +17,7 @@ class Store(models.Model):
                
 class Item(models.Model):
     name = models.CharField(max_length=100, default='')
-    comments = models.CharField(max_length=100, default='')
+    comments = models.CharField(max_length=1000, default='')
     expired = models.BooleanField(default=False)
     expiration = models.DateField(default='')
     store = models.ForeignKey(Store, related_name='items', default='')
@@ -27,4 +27,7 @@ class Item(models.Model):
         ordering = ('expiration',)
 
     def __unicode__(self):
-       return '%s: %s' % (self.name, self.expiration)
+        return '%s: %s' % (self.name, self.expiration)
+
+    def get_store(self):
+        return ' '.join([self.store])

@@ -1,4 +1,4 @@
-from snippets.views import SnippetViewSet, UserViewSet, api_root
+from views import StoreViewSet, UserViewSet, api_root, ItemViewSet
 from rest_framework import renderers
 
 store_list = StoreViewSet.as_view({
@@ -29,3 +29,4 @@ user_list = UserViewSet.as_view({
 user_detail = UserViewSet.as_view({
     'get': 'retrieve'
 })
+
