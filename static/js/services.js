@@ -1,13 +1,20 @@
 (function() {
-  var services;
+  angular
+  .module('nourish.services', [
+  ])
+  .factory('Stores', function($http) {
+    var getAllStores = function () {
+      console.log('in service')
+      return $http({
+        method: 'GET',
+        url: 'api/stores'
+      })
 
-  services = angular.module('nourish.services', []);
+    }
 
-  services.factory('Stores', function($http, $log, Stores) {
-    var stores
-    stores = 'test'
-
-    return stores
+    return {
+      getAllStores: getAllStores
+    }
   });
 
   

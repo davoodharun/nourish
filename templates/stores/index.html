@@ -5,9 +5,8 @@ ng-app="nourish"
 {% block content %}
 <div ui-view></div>
 <script type="text/ng-template" id="storeList">
-    <ul>
-    testing 
-    [[stores]]
+    <ul ng-repeat='store in stores'> 
+    [[store.name]]
     </ul>
 </script>
 {% endblock %}
