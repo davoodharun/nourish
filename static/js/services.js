@@ -4,7 +4,6 @@
   ])
   .factory('Stores', function($http) {
     var getAllStores = function () {
-      console.log('in service')
       return $http({
         method: 'GET',
         url: 'api/stores'
@@ -12,10 +11,40 @@
 
     }
 
+    var getItemsFromStore = function (storeId) {
+      return $http({
+        method:'GET',
+        url: 'api/stores/' + storeId
+      })
+    }
     return {
-      getAllStores: getAllStores
+      getAllStores: getAllStores,
+      getItemsFromStore: getItemsFromStore
+    }
+  })
+
+  .factory('Items', function($http) {
+    var getAllItems = function () {
+      return $http({
+        method: 'GET',
+        url: 'api/items'
+      })
+
+    }
+
+    var getItem = function (itemId) {
+      console.log('in items')
+      return $http({
+        method:'GET',
+        url: 'api/items/' + itemId
+      })
+    }
+    return {
+      getAllItems: getAllItems,
+      getItem: getItem
     }
   });
+
 
   
 

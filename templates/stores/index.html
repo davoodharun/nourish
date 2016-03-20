@@ -4,10 +4,37 @@ ng-app="nourish"
 {% endblock %}
 {% block content %}
 <div ui-view></div>
-<script type="text/ng-template" id="storeList">
+<script type="text/ng-template" id="profile">
+  <form>
+  <input>
+  </form>
+  <div ng-init= 'getStores()'>
     <ul ng-repeat='store in stores'> 
-    [[store.name]]
+      <a ui-sref="storeDetail({storeId: store.id})">[[store.name]]</a>
     </ul>
+  </div>
+</script>
+<script type="text/ng-template" id="storeDetail">
+   <div ng-init='getItemsFromStore()'>
+   [[storeName]] : [[storeDescription]]
+     <table>
+      <tr ng-repeat='item in storeItems'>
+        <td>
+          [[item.name]]
+        </td>
+        <td>
+          [[item.comments]]
+        </td>
+        <td>
+          [[item.expired]]
+        </td>
+        <td>
+          [[item.expiration]]
+        </td>
+      </tr> 
+       
+     </table>
+   </div>
 </script>
 {% endblock %}
 

@@ -9,9 +9,14 @@
       $interpolateProvider.startSymbol('[[');
       $interpolateProvider.endSymbol(']]');
       $urlRouterProvider.otherwise('/');
-      return $stateProvider.state('storeList', {
+      return $stateProvider.state('profile', {
         url: '/',
-        templateUrl: 'storeList',
+        templateUrl: 'profile',
+        controller: 'profileController'
+      })
+      .state('storeDetail', {
+        url:'^/stores/:storeId',
+        templateUrl: 'storeDetail',
         controller: 'storeController'
       })
     })
