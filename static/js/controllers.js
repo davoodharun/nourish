@@ -4,6 +4,7 @@
   ])
   .controller('profileController', function($scope, $state, $stateParams, Stores) {
     $scope.stores
+
     $scope.getStores = function () {
       Stores.getAllStores().then(function(response){
         $scope.stores = response.data.results
@@ -13,10 +14,17 @@
     $scope.createStore = function () {
       var storeData = {
         name: $scope.storeName,
-        description: $scope.description
+        description: $scope.storeDescription
       }
       Stores.createStore(storeData).then(function(response){
-        console.log(response)
+        $scope.getStores();
+      })
+    }
+
+    $scope.deleteStore = function (id) {
+      Stores.deleteStore(id).then(function(response){
+        console.log('deleted store with id: ' + id, response)
+        $scope.getStores();
       })
     }
 
@@ -25,24 +33,42 @@
   })
 .controller('storeController', function($scope, $state, $stateParams, Stores, Items) {
   $scope.storeName, $scope.storeDescription;
-  $scope.storeItems = [];
+  
+
   $scope.getItemsFromStore = function () {
+
     Stores.getItemsFromStore($stateParams.storeId).then(function(response){
+      $scope.storeItems = [];
       $scope.storeName = response.data.name;
       $scope.storeDescription = response.data.description;
       if(response.data.items.length>0){
         for(var i = 0; i<response.data.items.length; i++){
           var id = response.data.items[i].split('items/')[1].split('/')[0]
-          console.log(id)
+     
           Items.getItem(id).then(function(response){
             $scope.storeItems.push(response.data)
-            console.log($scope.storeItems)
           })
         }
+      } else {
+        // display no items
       }
       
     });
   }
+
+  $scope.addItem = function () {
+    var itemData = {
+      name: $scope.itemName,
+      comments: $scope.itemComments,
+      expiration: $scope.itemExpiration,
+      store: $stateParams.storeId
+    }
+
+    Items.addItem(itemData).then(function(response){
+      $scope.getItemsFromStore();
+    })
+  }
+
 })
 
 }).call(this);

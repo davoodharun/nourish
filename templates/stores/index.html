@@ -6,19 +6,35 @@ ng-app="nourish"
 <div ui-view></div>
 <script type="text/ng-template" id="profile">
   <form ng-submit='createStore()'>
-    <input ng-model='storeName'>
-    <input ng-model='storeDescription'>
+    Store Name: <input ng-model='storeName'><br>
+    Description: <input ng-model='storeDescription'> <br>
     <button type="submit">SUBMIT</button>
   </form>
-  <div ng-init= 'getStores()'>
-    <ul ng-repeat='store in stores'> 
-      <a ui-sref="storeDetail({storeId: store.id})">[[store.name]]</a>
-    </ul>
+  <div ng-init='getStores()'>
+    <table>
+      <tr ng-repeat='store in stores'> 
+        <td>
+          <a ui-sref="storeDetail({storeId: store.id})">[[store.name]]</a>
+        </td>
+        <td>
+          <a href='/' ng-click="deleteStore(store.id)">Delete</a>
+        </td>
+      </tr>
+    </table>
+    
   </div>
 </script>
 <script type="text/ng-template" id="storeDetail">
    <div ng-init='getItemsFromStore()'>
    [[storeName]] : [[storeDescription]]
+
+   <form ng-submit='addItem()'>
+     Item Name: <input ng-model='itemName'><br>
+     Comments: <input ng-model='itemComments'> <br>
+     Expiration Date: <input ng-model='itemExpiration'> <br>
+     <button type="submit">SUBMIT</button>
+   </form>
+
      <table>
       <tr ng-repeat='item in storeItems'>
         <td>

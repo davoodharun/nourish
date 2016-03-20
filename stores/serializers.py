@@ -31,7 +31,7 @@ class StoreSerializer(serializers.HyperlinkedModelSerializer):
 
 class ItemSerializer(serializers.HyperlinkedModelSerializer):
     # owner = serializers.ReadOnlyField(source='owner.username')
-    store = serializers.HyperlinkedRelatedField(many=False, queryset=Store.objects.all(), view_name='store-detail' )
+    store = serializers.PrimaryKeyRelatedField(many=False, queryset=Store.objects.all())
 
     class Meta:
         model = Item
