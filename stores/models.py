@@ -1,13 +1,13 @@
 from __future__ import unicode_literals
 from django.db import models
-from django.contrib import auth
+# from django.contrib import auth
 
 #Store Model
 ## Store model will contain many Items
 class Store(models.Model):
     name = models.CharField(max_length=100, default='')
     description = models.CharField(max_length=1000, default='')
-    owner = models.ForeignKey('auth.User', related_name='stores')
+    # owner = models.ForeignKey('auth.User', related_name='stores')
 
     class Meta:
         ordering = ('name',)
@@ -20,7 +20,7 @@ class Item(models.Model):
     comments = models.CharField(max_length=1000, default='')
     expiration = models.DateField(default='')
     store = models.ForeignKey(Store, related_name='items', default='')
-    owner = models.ForeignKey('auth.User', related_name='item') 
+    # owner = models.ForeignKey('auth.User', related_name='item') 
 
     class Meta:
         ordering = ('expiration',)

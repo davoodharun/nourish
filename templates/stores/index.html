@@ -5,8 +5,10 @@ ng-app="nourish"
 {% block content %}
 <div ui-view></div>
 <script type="text/ng-template" id="profile">
-  <form>
-  <input>
+  <form ng-submit='createStore()'>
+    <input ng-model='storeName'>
+    <input ng-model='storeDescription'>
+    <button type="submit">SUBMIT</button>
   </form>
   <div ng-init= 'getStores()'>
     <ul ng-repeat='store in stores'> 

@@ -2,7 +2,7 @@
   angular
   .module('nourish.services', [
   ])
-  .factory('Stores', function($http) {
+  .factory('Stores', function($http, $log) {
     var getAllStores = function () {
       return $http({
         method: 'GET',
@@ -11,15 +11,21 @@
 
     }
 
-    var getItemsFromStore = function (storeId) {
+    var createStore = function (store) {
       return $http({
-        method:'GET',
-        url: 'api/stores/' + storeId
-      })
+        method:'POST',
+        url: 'api/stores/',
+        data: store
+      }).success(function(data) {
+          return $log.info("Succesfully added store");
+      }).error(function(data) {
+          return $log.info("Failure to add store.");
+      });
     }
+
     return {
       getAllStores: getAllStores,
-      getItemsFromStore: getItemsFromStore
+      createStore: createStore
     }
   })
 

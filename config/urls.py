@@ -23,7 +23,7 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 router.register(r'stores', views.StoresViewSet)
 router.register(r'items', views.ItemsViewSet)
-router.register(r'users', views.UserViewSet)
+# router.register(r'users', views.UserViewSet)
 
 # The API URLs are now determined automatically by the router.
 # Additionally, we include the login URLs for the browsable API.

@@ -1,14 +1,14 @@
 from rest_framework import serializers
 from models import Store, Item
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 
 class StoreSerializer(serializers.HyperlinkedModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    # owner = serializers.ReadOnlyField(source='owner.username')
     items = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='item-detail' )
 
     class Meta:
         model = Store
-        fields = ('id', 'name', 'description', 'owner', 'items')
+        fields = ('id', 'name', 'description', 'items')
     # pk = serializers.IntegerField(read_only=True)
     # name = serializers.CharField(required=True, allow_blank=False, max_length=100)
     # description = serializers.CharField(required=False, allow_blank=True, max_length=1000)
@@ -30,12 +30,12 @@ class StoreSerializer(serializers.HyperlinkedModelSerializer):
     #     return instance
 
 class ItemSerializer(serializers.HyperlinkedModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    # owner = serializers.ReadOnlyField(source='owner.username')
     store = serializers.HyperlinkedRelatedField(many=False, queryset=Store.objects.all(), view_name='store-detail' )
 
     class Meta:
         model = Item
-        fields = ('id', 'name', 'comments', 'expired', 'expiration', 'store', 'owner')
+        fields = ('id', 'name', 'comments', 'expiration', 'store')
 
     # pk = serializers.IntegerField(read_only=True)
     # name = serializers.CharField(required=True, allow_blank=False, max_length=100)
@@ -62,9 +62,9 @@ class ItemSerializer(serializers.HyperlinkedModelSerializer):
     #     return instance
 
 
-class UserSerializer(serializers.ModelSerializer):
-    stores = serializers.HyperlinkedRelatedField(many=True, view_name='store-detail', read_only=True)
+# class UserSerializer(serializers.ModelSerializer):
+#     stores = serializers.HyperlinkedRelatedField(many=True, view_name='store-detail', read_only=True)
 
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'stores')
+#     class Meta:
+#         model = User
+#         fields = ('id', 'username', 'stores')

@@ -10,6 +10,16 @@
       })
     }
 
+    $scope.createStore = function () {
+      var storeData = {
+        name: $scope.storeName,
+        description: $scope.description
+      }
+      Stores.createStore(storeData).then(function(response){
+        console.log(response)
+      })
+    }
+
    
   
   })
