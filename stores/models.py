@@ -18,7 +18,6 @@ class Store(models.Model):
 class Item(models.Model):
     name = models.CharField(max_length=100, default='')
     comments = models.CharField(max_length=1000, default='')
-    expired = models.BooleanField(default=False)
     expiration = models.DateField(default='')
     store = models.ForeignKey(Store, related_name='items', default='')
     owner = models.ForeignKey('auth.User', related_name='item') 
