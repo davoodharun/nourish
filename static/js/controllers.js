@@ -43,6 +43,22 @@
 .controller('storeController', function($scope, $state, $stateParams, Stores, Items) {
   $scope.storeName, $scope.storeDescription;
   
+  $scope.getStore = function () {
+    Stores.getStore($stateParams.storeId).then(function(response){
+      $scope.storeName = response.data.name;
+      $scope.storeDescription = response.data.description;
+    })
+  }
+
+  $scope.updateStore = function(){
+    var data = {
+      name: $scope.storeName,
+      description: $scope.storeDescription
+    }
+    Stores.updateStore($stateParams.storeId, data).then(function(response){
+     
+    })
+  }
   // get all items for a particular store
   $scope.getItemsFromStore = function () {
     Stores.getItemsFromStore($stateParams.storeId).then(function(response){

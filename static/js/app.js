@@ -19,9 +19,14 @@
         templateUrl: 'storeDetail',
         controller: 'storeController'
       })
-      .state('itemDetail', {
-        url:'^/items/:itemId',
-        templateUrl: 'itemDetail',
+      .state('storeEdit', {
+        url:'^/storesEdit/:storeId',
+        templateUrl: 'storeEdit',
+        controller: 'storeController'
+      })
+      .state('itemEdit', {
+        url:'^/itemEdit/:itemId',
+        templateUrl: 'itemEdit',
         controller: 'itemController'
       })
     })

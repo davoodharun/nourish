@@ -21,7 +21,7 @@ ng-app="nourish"
         <td><a ui-sref="storeDetail({storeId: store.id})">[[store.name]]</a></td>
         <td>[[store.description]]</td>
         <td>[[store.items.length]]</td>
-        <td><button class="btn btn-danger btn-sm" ng-click="deleteStore(store.id)">Delete</a></td>
+        <td><a class="btn btn-warning btn-sm" ui-sref="storeEdit({storeId: store.id})">Edit</a><button class="btn btn-danger btn-sm" ng-click="deleteStore(store.id)">Delete</a></td>
       </tr>
     </table>
     
@@ -57,7 +57,7 @@ ng-app="nourish"
         <td>[[item.name]]</td>
         <td>[[item.comments]]</td>
         <td>[[item.expiration]]</td>
-        <td><a class="btn btn-warning btn-sm" ui-sref="itemDetail({itemId: item.id})">Edit</a><a href='' class="btn btn-danger btn-sm" ng-click="deleteItem(item.id)">Delete</a></td>
+        <td><a class="btn btn-warning btn-sm" ui-sref="itemEdit({itemId: item.id})">Edit</a><a href='' class="btn btn-danger btn-sm" ng-click="deleteItem(item.id)">Delete</a></td>
     
 
       </tr> 
@@ -81,10 +81,10 @@ ng-app="nourish"
   </div>
 </script>
 
-<script type="text/ng-template" id="itemDetail">
+<script type="text/ng-template" id="itemEdit">
   <div ng-init=getItem()>
     <form ng-submit='updateItem()'>
-    <h5>EDIT ITEM</h5>
+    <h5>EDIT ITEM: [[itemName]]</h5>
       <div class="form-group">
         <label> Item Name: </label> <input class="form-control input-sm" ng-model='itemName'>
       </div>
@@ -96,6 +96,21 @@ ng-app="nourish"
       </div>
       <button class="btn btn-primary" type="submit">UPDATE</button>
     </form>
+  </div>
+</script>
+
+<script type="text/ng-template" id="storeEdit">
+  <div ng-init=getStore()>
+    <form ng-submit='updateStore()'>
+        <h5>EDIT STORE: [[storeName]]</h5>
+        <div class="form-group">
+          Store Name: <input class="form-control input-sm" ng-model='storeName'>
+        </div>
+        <div class="form-group">
+          Description: <input class="form-control input-sm" ng-model='storeDescription'>
+        </div>
+        <button class="btn btn-primary" type="submit">UPDATE</button>
+      </form>
   </div>
 </script>
 {% endblock %}

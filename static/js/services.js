@@ -16,6 +16,18 @@
 
     }
 
+    var getStore = function (id) {
+      return $http({
+        method: 'GET',
+        url: 'api/stores/' + id
+      }).success(function(data) {
+        return $log.info("successfully got store")
+      }).error(function(data){
+        return $log.info("error getting store")
+      });
+
+    }
+
     var getItemsFromStore = function(id) {
       return $http({
         method: 'GET',
@@ -51,11 +63,25 @@
 
     }
 
+    var updateStore = function(id, data) {
+      return $http({
+        method: 'PUT',
+        url: 'api/stores/' + id + '/',
+        data: data
+      }).success(function(data) {
+          return $log.info("Succesfully updated store");
+      }).error(function(data) {
+          return $log.info("Failure to update store. View error object: ", data);
+      });
+    }
+
     return {
       getAllStores: getAllStores,
       getItemsFromStore: getItemsFromStore,
       createStore: createStore,
-      deleteStore: deleteStore
+      deleteStore: deleteStore,
+      getStore: getStore,
+      updateStore: updateStore
     }
 
   })
@@ -101,7 +127,6 @@
     }
 
     var updateItem = function(id, data) {
-      console.log(data)
       return $http({
         method: 'PUT',
         url: 'api/items/' + id + '/',
