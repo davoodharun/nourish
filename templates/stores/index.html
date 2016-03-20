@@ -1,20 +1,30 @@
 {% extends 'base.html' %}
 {% block body %}
 ng-app="nourish"
+
 {% endblock %}
 {% block content %}
 <div ui-view></div>
 <script type="text/ng-template" id="profile">
   <form ng-submit='createStore()'>
-    Store Name: <input ng-model='storeName'><br>
-    Description: <input ng-model='storeDescription'> <br>
-    <button type="submit">SUBMIT</button>
+    <h4>Add a store</h4>
+    <div class="form-group">
+      Store Name: <input class="form-control" ng-model='storeName'>
+    </div>
+    <div class="form-group">
+      Description: <input class="form-control" ng-model='storeDescription'>
+    </div>
+    <button class="btn btn-primary" type="submit">SUBMIT</button>
   </form>
+  <br>
   <div ng-init='getStores()'>
-    <table>
+    <table class="table table-hover">
       <tr ng-repeat='store in stores'> 
         <td>
           <a ui-sref="storeDetail({storeId: store.id})">[[store.name]]</a>
+        </td>
+        <td>
+          [[store.description]]
         </td>
         <td>
           <a href='/' ng-click="deleteStore(store.id)">Delete</a>
@@ -26,16 +36,23 @@ ng-app="nourish"
 </script>
 <script type="text/ng-template" id="storeDetail">
    <div ng-init='getItemsFromStore()'>
-   [[storeName]] : [[storeDescription]]
+   <h3>Store: [[storeName]]</h3>
+   <h4>Description: [[storeDescription]]</h4>
 
    <form ng-submit='addItem()'>
-     Item Name: <input ng-model='itemName'><br>
-     Comments: <input ng-model='itemComments'> <br>
-     Expiration Date: <input ng-model='itemExpiration'> <br>
-     <button type="submit">SUBMIT</button>
+    <div class="form-group">
+      <label> Item Name: </label> <input class="form-control" ng-model='itemName'>
+    </div>
+    <div class="form-group"> 
+      <label> Comments: </label> <input class="form-control" ng-model='itemComments'>
+    </div>
+    <div class="form-group"> 
+      <label> Expiration Date: </label> <input class="form-control" ng-model='itemExpiration'> (YYYY-MM-DD)
+    </div>
+     <button class="btn btn-primary" type="submit">SUBMIT</button>
    </form>
-
-     <table>
+   <br>
+     <table class="table table-hover">
       <tr ng-repeat='item in storeItems'>
         <td>
           [[item.name]]
@@ -48,6 +65,9 @@ ng-app="nourish"
         </td>
         <td>
           [[item.expiration]]
+        </td>
+        <td>
+          <a href='' ng-click="deleteItem(item.id)">Delete</a>
         </td>
       </tr> 
        

@@ -88,10 +88,23 @@
           return $log.info("Failure to add item. View error object: ", data);
       });
     }
+
+    var deleteItem = function(id) {
+      return $http({
+        method: 'DELETE',
+        url: 'api/items/' + id
+      }).success(function(data) {
+          return $log.info("Succesfully deleted item");
+      }).error(function(data) {
+          return $log.info("Failure to delete item. View error object: ", data);
+      });
+    }
+
     return {
       getAllItems: getAllItems,
       getItem: getItem,
-      addItem: addItem
+      addItem: addItem,
+      deleteItem: deleteItem
     }
   });
 
