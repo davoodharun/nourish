@@ -7,10 +7,10 @@
     </head>
     <body {% block body%} {% endblock %} >
         <div class="container">
-            <div class="page-header">
+            <div class="center-block">
                 <h1>{% block header %}Welcome to Nourish!{% endblock %}</h1>
-                <h4>Keep your fridge clean.</h4>
-                <a href='#/'>Home</a>
+                <blockquote>Keep your fridge clean.</blockquote>
+                <a class="btn btn-info btn-xs" href='#/'>Home</a> <a class="btn btn-info btn-xs" href='#/'>About</a> <a class="btn btn-info btn-xs" href='#/'>Item List</a>
             </div>
             {% block content %}
             {% endblock %}

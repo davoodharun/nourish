@@ -22,6 +22,8 @@
       }
       Stores.createStore(storeData).then(function(response){
         $scope.getStores();
+        $scope.storeName = '';
+        $scope.storeDescription = '';
       })
     }
 
@@ -29,7 +31,7 @@
     $scope.deleteStore = function (id) {
       Stores.deleteStore(id).then(function(response){
         console.log('deleted store with id: ' + id, response)
-       
+        $scope.getStores();
       })
     }
 
@@ -43,7 +45,6 @@
   
   // get all items for a particular store
   $scope.getItemsFromStore = function () {
-
     Stores.getItemsFromStore($stateParams.storeId).then(function(response){
       $scope.storeItems = [];
       $scope.storeName = response.data.name;
@@ -73,12 +74,39 @@
 
     Items.addItem(itemData).then(function(response){
       $scope.getItemsFromStore();
+      $scope.itemName = '';
+      $scope.itemComments = '';
+      $scope.itemExpiration = ''; 
     })
   }
 
   $scope.deleteItem = function (itemId) {
     Items.deleteItem(itemId).then(function(response){
       $scope.getItemsFromStore();
+    })
+  }
+
+})
+.controller('itemController', function($scope,$state, $stateParams, Stores, Items){
+ 
+  $scope.getItem = function(){
+    Items.getItem($stateParams.itemId).then(function(response){
+        $scope.itemName = response.data.name;
+        $scope.itemComments = response.data.comments;
+        $scope.itemExpiration = response.data.expiration;
+        $scope.itemStore = response.data.store
+      })
+  }
+
+  $scope.updateItem = function(){
+    var data = {
+      name: $scope.itemName,
+      comments: $scope.itemComments,
+      expiration: $scope.itemExpiration,
+      store: $scope.itemStore
+    }
+    Items.updateItem($stateParams.itemId, data).then(function(response){
+     
     })
   }
 

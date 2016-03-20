@@ -100,11 +100,25 @@
       });
     }
 
+    var updateItem = function(id, data) {
+      console.log(data)
+      return $http({
+        method: 'PUT',
+        url: 'api/items/' + id + '/',
+        data: data
+      }).success(function(data) {
+          return $log.info("Succesfully updated item");
+      }).error(function(data) {
+          return $log.info("Failure to update item. View error object: ", data);
+      });
+    }
+
     return {
       getAllItems: getAllItems,
       getItem: getItem,
       addItem: addItem,
-      deleteItem: deleteItem
+      deleteItem: deleteItem,
+      updateItem: updateItem
     }
   });
 

@@ -19,6 +19,11 @@
         templateUrl: 'storeDetail',
         controller: 'storeController'
       })
+      .state('itemDetail', {
+        url:'^/items/:itemId',
+        templateUrl: 'itemDetail',
+        controller: 'itemController'
+      })
     })
     .config(function($httpProvider) {
       var getCookie;

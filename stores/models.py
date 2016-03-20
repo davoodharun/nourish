@@ -5,8 +5,8 @@ from django.db import models
 #Store Model
 ## Store model will contain many Items
 class Store(models.Model):
-    name = models.CharField(max_length=100, default='')
-    description = models.CharField(max_length=1000, default='')
+    name = models.CharField(max_length=100, default='Store')
+    description = models.CharField(max_length=1000, default='N/A')
     # owner = models.ForeignKey('auth.User', related_name='stores')
 
     class Meta:
