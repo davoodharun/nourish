@@ -16,6 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_DIR = Path(__file__).ancestor(3)
 APP_DIR = Path(__file__).ancestor(2)
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -117,7 +118,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     APP_DIR.child('static'),
 )
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
 
 REST_FRAMEWORK = {
