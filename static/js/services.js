@@ -103,7 +103,11 @@
       return $http({
         method: 'GET',
         url: 'api/items'
-      })
+      }).success(function(response){
+        return $log.info('successfully got all items')
+      }).error(function(data) {
+        return $log.info("Failure to GET all items. View error object: ", data);
+      });
 
     }
 
@@ -112,7 +116,11 @@
       return $http({
         method:'GET',
         url: 'api/items/' + itemId
-      })
+      }).success(function(response){
+        return $log.info('successfully got item')
+      }).error(function(data) {
+        return $log.info("Failure to GET item. View error object: ", data);
+      });
     }
 
     // POST Item to store

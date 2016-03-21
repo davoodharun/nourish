@@ -94,15 +94,18 @@
       }
 
       Items.addItem(itemData).then(function(response){
-        
+        $scope.getAllItemsFromStore();
+        $scope.itemName = '';
+        $scope.itemComments = '';
+        $scope.itemExpiration = '';
+        $scope.itemAmount = ''; 
       })
-
     }
 
     // delete item from store
     $scope.deleteItem = function (itemId) {
       Items.deleteItem(itemId).then(function(response){
-        $scope.getItemsFromStore();
+        $scope.getAllItemsFromStore();
       })
     }
 
@@ -110,7 +113,7 @@
 
  //Item Controller  
   .controller('itemController', function($scope,$state, $stateParams, $location, Stores, Items){
-    $scope.items
+    // get specific item
     $scope.getItem = function(){
       Items.getItem($stateParams.itemId).then(function(response){
           $scope.itemName = response.data.name;
@@ -121,6 +124,7 @@
         })
     }
 
+    //update specfic item
     $scope.updateItem = function(){
       var data = {
         name: $scope.itemName,
