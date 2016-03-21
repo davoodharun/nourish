@@ -5,6 +5,8 @@ ng-app="nourish"
 {% endblock %}
 {% block content %}
 <div ui-view></div>
+
+<!-- PROFILE VIEW-->
 <script type="text/ng-template" id="profile">
   <h4>STORE LIST</h4>
   <div ng-init='getStores()'>
@@ -39,6 +41,7 @@ ng-app="nourish"
   
 </script>
 
+<!-- STORE VIEW -->
 <script type="text/ng-template" id="storeDetail">
 
   <div ng-init='getAllItemsFromStore()'>
@@ -65,6 +68,7 @@ ng-app="nourish"
       </tr> 
      
     </table>
+
   <h5>ADD AN ITEM</h5>
   
     <form name='ItemForm' ng-submit='addItem()' novalidate>
@@ -86,6 +90,7 @@ ng-app="nourish"
   </div>
 </script>
 
+<!-- ITEM EDIT VIEW -->
 <script type="text/ng-template" id="itemEdit">
   <div ng-init=getItem()>
   <h5>EDIT ITEM: [[itemName]]</h5>
@@ -107,6 +112,7 @@ ng-app="nourish"
   </div>
 </script>
 
+<!-- STORE EDIT VIEW -->
 <script type="text/ng-template" id="storeEdit">
   <div ng-init=getStore()>
     <form ng-submit='updateStore()'>
@@ -122,6 +128,7 @@ ng-app="nourish"
   </div>
 </script>
 
+<!-- ITEM LIST VIEW -->
 <script type="text/ng-template" id="itemList">
   <div ng-init=getItemsList()>
     <table class="table table-hover">

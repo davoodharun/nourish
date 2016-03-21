@@ -94,12 +94,9 @@
       }
 
       Items.addItem(itemData).then(function(response){
-        $scope.getAllItemsFromStore();
-        $scope.itemName = '';
-        $scope.itemComments = '';
-        $scope.itemExpiration = '';
-        $scope.itemAmount = ''; 
+        
       })
+
     }
 
     // delete item from store
