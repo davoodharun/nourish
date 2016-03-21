@@ -117,6 +117,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     APP_DIR.child('static'),
 )
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'staticfiles')
+
 
 REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
