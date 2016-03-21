@@ -83,7 +83,7 @@
     }
 
 
-    // add an item for a particular store --- date formate must be in YYYY-MM-DD
+    // add an item for a particular store ---
     $scope.addItem = function () {
       var itemData = {
         name: $scope.itemName,

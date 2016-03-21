@@ -94,7 +94,7 @@ ng-app="nourish"
 <script type="text/ng-template" id="itemEdit">
   <div ng-init=getItem()>
   <h5>EDIT ITEM: [[itemName]]</h5>
-    <form name='ItemForm' ng-submit='updateItem()'>
+    <form name='ItemForm' ng-submit='updateItem()' novalidate>
       <div class="form-groupv">
         <label> Item Name: </label> <input name='name' class="form-control input-sm" ng-model='itemName' required>
       </div>
