@@ -1,0 +1,15 @@
+.form-groupv .ng-dirty.ng-valid {
+border:1px solid Green; 
+}
+
+.form-groupv .ng-dirty.ng-invalid {
+border:1px solid Red; 
+}
+
+.form-groupv .ng-dirty.ng-valid ~ span.ok { 
+color:green; display:inline; 
+}
+
+.form-groupv .ng-dirty.ng-invalid ~ span.ko {
+color:red; display:inline; 
+}

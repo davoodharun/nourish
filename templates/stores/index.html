@@ -21,7 +21,7 @@ ng-app="nourish"
         <td><a ui-sref="storeDetail({storeId: store.id})">[[store.name]]</a></td>
         <td>[[store.description]]</td>
         <td>[[store.items.length]]</td>
-        <td><a class="btn btn-warning btn-sm" ui-sref="storeEdit({storeId: store.id})">Edit</a><button class="btn btn-danger btn-sm" ng-click="deleteStore(store.id)">Delete</a></td>
+        <td><a class="btn btn-info btn-sm " ui-sref="storeEdit({storeId: store.id})">Edit Store</a> <a class="btn btn-warning btn-sm" ui-sref="storeDetail({storeId: store.id})">Edit Items</a> <button class="btn btn-danger btn-sm" ng-click="deleteStore(store.id)">Delete</a></td>
       </tr>
     </table>
     
@@ -34,14 +34,14 @@ ng-app="nourish"
     <div class="form-group">
       Description: <input placeholder='Enter description of store...' class="form-control input-sm" ng-model='storeDescription'>
     </div>
-    <button class="btn btn-primary" type="submit">SUBMIT</button>
+    <button class="btn btn-primary" type="submit">ADD STORE</button>
   </form>
   
 </script>
 
 <script type="text/ng-template" id="storeDetail">
 
-  <div ng-init='getItemsFromStore()'>
+  <div ng-init='getAllItemsFromStore()'>
     <h2>[[storeName]]</h2>
     <h5>ITEM LIST</h5>
     <table class="table table-hover">
@@ -50,6 +50,7 @@ ng-app="nourish"
          <th>Name</th>
          <th>Comments</th>
          <th>Expiration Date</th>
+         <th>Amount Remaining</th>
          <th></th>
        </tr>
       </thead>
@@ -57,25 +58,29 @@ ng-app="nourish"
         <td>[[item.name]]</td>
         <td>[[item.comments]]</td>
         <td>[[item.expiration]]</td>
-        <td><a class="btn btn-warning btn-sm" ui-sref="itemEdit({itemId: item.id})">Edit</a><a href='' class="btn btn-danger btn-sm" ng-click="deleteItem(item.id)">Delete</a></td>
+        <td>[[item.amount]]</td>
+        <td><a class="btn btn-warning btn-sm" ui-sref="itemEdit({itemId: item.id})">Edit</a> <a href='' class="btn btn-danger btn-sm" ng-click="deleteItem(item.id)">Delete</a></td>
     
 
       </tr> 
      
     </table>
-
-    <form ng-submit='addItem()'>
-    <h5>ADD AND ITEM</h5>
-      <div class="form-group">
-        <label> Item Name: </label> <input placeholder='Enter name of item...' class="form-control input-sm" ng-model='itemName'>
+  <h5>ADD AN ITEM</h5>
+  
+    <form name='ItemForm' ng-submit='addItem()' novalidate>
+      <div class="form-groupv">
+        <label> Item Name: </label> <input name='name' placeholder='Enter name of item...' class="form-control input-sm" ng-model='itemName' required />
       </div>
-      <div class="form-group"> 
-        <label> Comments: </label> <input placeholder='comments...' class="form-control input-sm" ng-model='itemComments'>
+      <div class="form-groupv"> 
+        <label> Comments: </label> <input name='comments' placeholder='comments...' class="form-control input-sm" ng-model='itemComments' />
       </div>
-      <div class="form-group"> 
-        <label> Expiration Date: </label> <input placeholder='YYYY-MM-DD' class="form-control input-sm" ng-model='itemExpiration'> 
+      <div class="form-groupv"> 
+        <label> Expiration Date: </label> <input name='expiration' placeholder='YYYY-MM-DD' class="form-control input-sm" ng-model='itemExpiration' /> 
       </div>
-      <button class="btn btn-primary" type="submit">SUBMIT</button>
+      <div class="form-groupv"> 
+        <label> Amount Remaining: </label> <input type="range" name="points" data-highlight="true" id="points" min="0" max="100" ng-model='itemAmount' />
+      </div>
+      <button ng-disabled='ItemForm.name.$invalid || ItemForm.expiration.$invalid' class="btn btn-primary" type="submit">SUBMIT</button>
     </form>
         
   </div>
@@ -83,18 +88,21 @@ ng-app="nourish"
 
 <script type="text/ng-template" id="itemEdit">
   <div ng-init=getItem()>
-    <form ng-submit='updateItem()'>
-    <h5>EDIT ITEM: [[itemName]]</h5>
-      <div class="form-group">
-        <label> Item Name: </label> <input class="form-control input-sm" ng-model='itemName'>
+  <h5>EDIT ITEM: [[itemName]]</h5>
+    <form name='ItemForm' ng-submit='updateItem()'>
+      <div class="form-groupv">
+        <label> Item Name: </label> <input name='name' class="form-control input-sm" ng-model='itemName' required>
       </div>
-      <div class="form-group"> 
-        <label> Comments: </label> <input class="form-control input-sm" ng-model='itemComments'>
+      <div class="form-groupv"> 
+        <label> Comments: </label> <input name='comments' class="form-control input-sm" ng-model='itemComments'>
       </div>
-      <div class="form-group"> 
-        <label> Expiration Date: </label> <input class="form-control input-sm" ng-model='itemExpiration'> 
+      <div class="form-groupv"> 
+        <label> Expiration Date: </label> <input name='expiration' placeholder='YYYY-MM-DD' class="form-control input-sm" ng-model='itemExpiration'> 
       </div>
-      <button class="btn btn-primary" type="submit">UPDATE</button>
+      <div class="form-groupv"> 
+        <label> Amount Remaining: </label> <input type="range" name="points" data-highlight="true" id="points" min="0" max="100" ng-model='itemAmount'> 
+      </div>
+      <button ng-disabled='ItemForm.name.$invalid || ItemForm.expiration.$invalid' class="btn btn-primary" type="submit">UPDATE</button>
     </form>
   </div>
 </script>
@@ -113,11 +121,37 @@ ng-app="nourish"
       </form>
   </div>
 </script>
+
+<script type="text/ng-template" id="itemList">
+  <div ng-init=getItemsList()>
+    <table class="table table-hover">
+      <thead> 
+       <tr>
+         <th>Name</th>
+         <th>Comments</th>
+         <th>Expiration Date</th>
+         <th>Amount Remaining</th>
+         <th>Store Id</th>
+       </tr>
+      </thead>
+      <tr ng-repeat='item in items'>
+        <td>[[item.name]]</td>
+        <td>[[item.comments]]</td>
+        <td>[[item.expiration]]</td>
+        <td>[[item.amount]]</td>
+        <td><a ui-sref="storeDetail({storeId: item.store})">[[item.store]]</a></td>
+      </tr> 
+    
+    </table>
+  </div>
+</script>
 {% endblock %}
 
 {% block javascript %}
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.1.1/rangeslider.min.js'></script>
 <script src="{{ STATIC_URL}}js/app.js"></script>
 <script src="{{ STATIC_URL}}js/controllers.js"></script>
 <script src="{{ STATIC_URL}}js/services.js"></script>

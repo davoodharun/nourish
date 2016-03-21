@@ -7,7 +7,7 @@ from django.db import models
 class Store(models.Model):
     name = models.CharField(max_length=100, default='Store')
     description = models.CharField(max_length=1000, default='N/A')
-    # owner = models.ForeignKey('auth.User', related_name='stores')
+
 
     class Meta:
         ordering = ('name',)
@@ -16,11 +16,11 @@ class Store(models.Model):
        return '%s' % (self.name)
                
 class Item(models.Model):
-    name = models.CharField(max_length=100, default='')
+    name = models.CharField(max_length=100, default='Sample Item')
     comments = models.CharField(max_length=1000, default='')
     expiration = models.DateField(default='')
+    amount = models.PositiveIntegerField(default=100)
     store = models.ForeignKey(Store, related_name='items', default='')
-    # owner = models.ForeignKey('auth.User', related_name='item') 
 
     class Meta:
         ordering = ('expiration',)

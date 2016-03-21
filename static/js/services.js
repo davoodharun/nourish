@@ -2,8 +2,11 @@
   angular
   .module('nourish.services', [
   ])
+
+  // Stores Factory
   .factory('Stores', function($http, $log) {
 
+    // GET all stores from API
     var getAllStores = function () {
       return $http({
         method: 'GET',
@@ -16,6 +19,7 @@
 
     }
 
+    // GET single store from API
     var getStore = function (id) {
       return $http({
         method: 'GET',
@@ -28,6 +32,7 @@
 
     }
 
+    // GET all items from a single store from API
     var getItemsFromStore = function(id) {
       return $http({
         method: 'GET',
@@ -39,6 +44,7 @@
       });
     }
 
+    //POST new store to API
     var createStore = function (store) {
       return $http({
         method:'POST',
@@ -51,6 +57,7 @@
       });
     }
 
+    // DELETE existing store from API
     var deleteStore = function (id) {
       return $http({
         method: 'DELETE',
@@ -63,6 +70,7 @@
 
     }
 
+    // PUT or UPDATE Store from API
     var updateStore = function(id, data) {
       return $http({
         method: 'PUT',
@@ -75,6 +83,7 @@
       });
     }
 
+    // return Store service functions
     return {
       getAllStores: getAllStores,
       getItemsFromStore: getItemsFromStore,
@@ -82,12 +91,14 @@
       deleteStore: deleteStore,
       getStore: getStore,
       updateStore: updateStore
-    }
+    };
 
   })
 
+  // Items Factory --- getAllItems, getItem, addItem, deleteItem, updateItem
   .factory('Items', function($http, $log) {
     
+    //GET all items from API
     var getAllItems = function () {
       return $http({
         method: 'GET',
@@ -96,6 +107,7 @@
 
     }
 
+    // GET individual item information
     var getItem = function (itemId) {
       return $http({
         method:'GET',
@@ -103,6 +115,7 @@
       })
     }
 
+    // POST Item to store
     var addItem = function(data) {
       return $http({
         method: 'POST',
@@ -115,6 +128,7 @@
       });
     }
 
+    // DELETE Item from store
     var deleteItem = function(id) {
       return $http({
         method: 'DELETE',
@@ -126,6 +140,7 @@
       });
     }
 
+    //Update item from store
     var updateItem = function(id, data) {
       return $http({
         method: 'PUT',
@@ -144,10 +159,8 @@
       addItem: addItem,
       deleteItem: deleteItem,
       updateItem: updateItem
-    }
+    };
+
   });
-
-
-  
 
 }).call(this);

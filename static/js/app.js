@@ -29,6 +29,11 @@
         templateUrl: 'itemEdit',
         controller: 'itemController'
       })
+      .state('itemList', {
+        url:'^/itemList',
+        templateUrl: 'itemList',
+        controller: 'itemController'
+      })
     })
     .config(function($httpProvider) {
       var getCookie;
