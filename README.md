@@ -8,4 +8,7 @@ This application serves to allow users to keep track of items in their kitchen. 
 #Future Features
 - Notifications of expiring items
 - Smart grocery list
+- User authentication with persisted profiles/stores
 
+#Schema
+![alt text](screenshots/schema.jpg "Schema Design")
