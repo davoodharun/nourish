@@ -16,15 +16,15 @@ This application serves to allow users to keep track of items in their kitchen. 
 #API
 
 ##api/stores
-  - GET: get all stores 
-  - POST: add store
+  GET: get all stores 
+  POST: add store
 ##api/stores/{storeID}
-  - GET: get specific store
-  - PUT: update specific store
+  GET: get specific store
+  PUT: update specific store
 ##api/items
-  - GET: get all items
-  - POST: add item
-  - PUT: update item
+  GET: get all items
+  POST: add item
+  PUT: update item
 ##api/items/{itemID}
-  - GET: get specific item
-  - PUT: update spefic item
+  GET: get specific item
+  PUT: update spefic item
