@@ -2,7 +2,9 @@
   angular
     .module('nourish', [
       'ui.router',
-      'nourish.controllers',
+      'nourish.profileController',
+      'nourish.storeController',
+      'nourish.itemController',
       'nourish.services'
       ])
     .config(function($interpolateProvider, $stateProvider, $urlRouterProvider) {
