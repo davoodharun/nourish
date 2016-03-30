@@ -1,0 +1,24 @@
+{
+  "name": "nourish",
+  "description": "keep your fridge clean",
+  "main": "static/js/app.js",
+  "authors": [
+    "Harun Davood"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/puzzlehe4d/nourish",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "latest",
+    "angular-route": "latest",
+    "angular-mocks": "latest",
+    "angular-ui-router": "^0.2.18"
+  }
+}

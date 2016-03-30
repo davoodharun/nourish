@@ -155,8 +155,8 @@ ng-app="nourish"
 {% endblock %}
 
 {% block javascript %}
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+<script src="{{STATIC_URL}}lib/angular/angular.min.js"></script>
+<script src="{{STATIC_URL}}lib/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.1.1/rangeslider.min.js'></script>
 <script src="{{ STATIC_URL}}js/app.js"></script>

@@ -5,12 +5,13 @@
 
   // Profile Controller --- view for stores list
   .controller('profileController', function($scope, $state, $stateParams, Stores) {
-    $scope.stores;
+    $scope.stores = [];
 
     // get all stores in db
     $scope.getStores = function () {
       Stores.getAllStores().then(function(response){
         $scope.stores = response.data.results;
+        console.log($scope.stores)
       })
     }
 
