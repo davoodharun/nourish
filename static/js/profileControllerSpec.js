@@ -1,7 +1,6 @@
 'use strict';
-
 describe('profileController', function () {
-  var $scope, $rootScope, createController, Stores, $httpBackend;
+  var $scope, $rootScope, createController, Stores, $state, $stateParams, $httpBackend;
 
   // using angular mocks, we can inject the injector
   // to retrieve our dependencies
@@ -19,6 +18,8 @@ describe('profileController', function () {
     createController = function () {
       return $controller('profileController', {
         $scope: $scope,
+        $state: $state,
+        $stateParams: $stateParams,
         Stores: Stores
       });
     };
@@ -27,27 +28,29 @@ describe('profileController', function () {
 
   it('should have a data property on the $scope', function () {
     createController();
-    expect(true).toBe(true);
+    expect($scope.stores).to.be.an('array');
   });
 
-  // it('should call `Stores.getAll()` when controller is loaded', function () {
-  //   sinon.spy(Stores, 'getAll');
-  //   $httpBackend.expectGET('/api/links').respond(200);
+  it('should call `Stores.getAllStores()` when controller is loaded', function () {
+   
+    sinon.spy(Stores, 'getAllStores');
+    
+    $httpBackend.expectGET('api/stores').respond({results: 'hi'});
+    $httpBackend.expectGET('profile').respond({results: 'hi'});
+    createController(); 
+    $httpBackend.flush();
 
-  //   createController();
-  //   $httpBackend.flush();
+    expect(Stores.getAllStores.called).to.equal(true);
+    Stores.getAllStores.restore();
+  });
 
-  //   expect(Stores.getAll.called).to.equal(true);
-  //   Stores.getAll.restore();
-  // });
+  it('should populate the data property after the call to `Store.getAllStores()`', function () {
+    var mockLinks = [{},{},{}];
+    $httpBackend.expectGET('api/stores').respond(mockLinks);
 
-  // it('should populate the data property after the call to `Stores.getAll()`', function () {
-  //   var mockStores = [{},{},{}];
-  //   $httpBackend.expectGET('/api/links').respond(mockStores);
+    createController();
+    $httpBackend.flush();
 
-  //   createController();
-  //   $httpBackend.flush();
-
-  //   expect($scope.data.links).to.deep.equal(mockStores);
-  // });
+    expect($scope.stores).to.deep.equal(mockLinks);
+  });
 });

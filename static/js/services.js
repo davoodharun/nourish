@@ -12,7 +12,7 @@
         method: 'GET',
         url: 'api/stores'
       }).success(function(data) {
-        return $log.info("successfully got all stores", data)
+        return $log.info("successfully got all stores")
       }).error(function(data){
         return $log.info("error getting stores")
       });

@@ -11,7 +11,6 @@
     $scope.getStores = function () {
       Stores.getAllStores().then(function(response){
         $scope.stores = response.data.results;
-        console.log($scope.stores)
       })
     }
 
@@ -38,5 +37,7 @@
         $scope.getStores();
       });
     }
+
+    $scope.getStores();
   })
 }).call(this);

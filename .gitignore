@@ -2,4 +2,4 @@ __pycahce__
 *.pyc
 env/
 node_modules
-static/lib
+static/lib/*.js	
